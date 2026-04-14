@@ -61,7 +61,7 @@ void setup() {
 }
 
 void loop() {
-  // ---------------- microphone ----------------
+  // microphone
   if (samplesRead) {
     long sum = 0;
     for (int i = 0; i < samplesRead; i++) {
@@ -73,7 +73,7 @@ void loop() {
 
   bool soundState = (micLevel > 300);
 
-  // ---------------- light ----------------
+  // light
   // only update when new valid data is available
   if (APDS.colorAvailable()) {
     APDS.readColor(r, g, b, clearVal);
@@ -90,7 +90,7 @@ void loop() {
     darkState = false;
   }
 
-  // ---------------- proximity ----------------
+  // proximity
   // only update when new valid data is available
   if (APDS.proximityAvailable()) {
     proximity = APDS.readProximity();
@@ -120,7 +120,7 @@ void loop() {
     nearState = false;
   }
 
-  // ---------------- motion ----------------
+  // motion
   float ax = 0.0, ay = 0.0, az = 1.0;
   float motionMetric = 0.0;
 
@@ -150,7 +150,7 @@ void loop() {
     movingState = false;
   }
 
-  // ---------------- final label ----------------
+  // final label
   String finalLabel = "UNMATCHED";
 
   if (!soundState && !darkState && !movingState && !nearState) {
@@ -163,7 +163,7 @@ void loop() {
     finalLabel = "NOISY_BRIGHT_MOVING_NEAR";
   }
 
-  // ---------------- serial output ----------------
+  // serial output
   Serial.print("mic=");
   Serial.print(micLevel);
   Serial.print(" clear=");
